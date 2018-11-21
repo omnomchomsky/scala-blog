@@ -6,6 +6,9 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /aboutme                    controllers.HomeController.aboutMe
-
+GET     /blog                       controllers.HomeController.blog
+GET     /authors                    controllers.BlogController.authors
+POST    /insert/author              controllers.BlogController.insertAuthor
+GET     /piglet                     controllers.CountController.piglet
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

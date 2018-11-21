@@ -1,0 +1,22 @@
+@(authors:Seq[Author])
+
+@main("Author Database") {
+  <div>
+    <div id="authors">
+      <h2>Add an author here:</h2>
+      <form action "/insert/author" method="POST">
+        <input name="username" type="text" placeholder="Username..."/>
+        <input name="password" type="text" placeholder="Password..."/>
+        <input name="email"    type="text" placeholder="E-Mail..."/>
+        <input type="submit"/>
+      </form>
+
+      <h2>Previously inserted authors:</h2>
+      <table>
+        <tr><th>Name</th><th>Color</th></tr>
+        @for( a <- authors){
+        <tr><td>@a.username</td><td>@a.email</td></tr>
+        }
+     </table>
+  </div> 
+}

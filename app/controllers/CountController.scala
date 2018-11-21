@@ -4,12 +4,14 @@ import javax.inject._
 import play.api._
 import play.api.mvc._
 
+import services.Piglet
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class CountController @Inject()(cc: ControllerComponents, piggy: Piglet) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.
@@ -18,15 +20,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
-  }
+  
 
-  def aboutMe() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.aboutme())
-  }
-
-  def blog() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.blog())
+  def piglet() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.piggy(piggy.count))
   }
 }

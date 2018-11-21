@@ -10,6 +10,14 @@ scalaVersion := "2.12.6"
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 
+// https://mvnrepository.com/artifact/org.postgresql/postgresql
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
+
+// https://mvnrepository.com/artifact/com.typesafe.slick/slick
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
+libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
+
+routesGenerator := InjectedRoutesGenerator
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
 
