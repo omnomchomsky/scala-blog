@@ -1,43 +1,42 @@
-CREATE TABLE blog.author(
-  author_id serial PRIMARY KEY,
-  username varchar (50) UNIQUE NOT NULL,
+#DROP DATABASE default;
+#CREATE DATABASE default;
+#USE default;
+CREATE TABLE Author(
+  author_id int AUTO_INCREMENT NOT NULL,
+  username varchar (50) NOT NULL,
   password varchar (50) NOT NULL,
-  email varchar(355) UNIQUE NOT NULL,
-  created_on TIMESTAMP NOT NULL,
-  last_login TIMESTAMP
+  email varchar(100) NOT NULL,
+  last_login TIMESTAMP,
+  PRIMARY KEY (author_id)
 );
 
-CREATE TABLE blog.post(
-  post_id SERIAL PRIMARY KEY NOT NULL,
-  author_id SERIAL NOT NULL,
-  CONSTRAINT author FOREIGN KEY (author_id)
-    REFERENCES author(author_id) MATCH SIMPLE
-    ON UPDATE NO ACTION ON DELETE NO ACTION,
-  date_posted TIMESTAMP NOT NULL
+CREATE TABLE Post(
+  post_id int AUTO_INCREMENT NOT NULL,
+  author_id int NOT NULL,
+  date_posted DATE NOT NULL,
+  FOREIGN KEY(author_id) REFERENCES Author (author_id) ON DELETE CASCADE,
+  PRIMARY KEY(post_id)
 );
 
-CREATE TABLE blog.comment (
-  comment_id  SERIAL PRIMARY KEY NOT NULL,
-  post_id     SERIAL NOT NULL,
-  CONSTRAINT post FOREIGN KEY (post_id)
-    REFERENCES blog.post(post_id) MATCH SIMPLE
-    ON UPDATE NO ACTION ON DELETE NO ACTION,
-  date_posted TIMESTAMP NOT NULL
+CREATE TABLE Comment (
+  comment_id  int AUTO_INCREMENT NOT NULL,
+  post_id     int NOT NULL,
+  date_posted TIMESTAMP NOT NULL,
+  FOREIGN KEY (post_id) REFERENCES Post(post_id) ON DELETE CASCADE ,
+  PRIMARY KEY(comment_id)
 );
 
-CREATE TABLE blog.comment_content(
-  comment_id SERIAL PRIMARY KEY NOT NULL,
-  CONSTRAINT comment FOREIGN KEY (comment_id)
-    REFERENCES blog.comment(comment_id) MATCH SIMPLE
-    ON UPDATE NO ACTION ON DELETE NO ACTION,
-  content text
+CREATE TABLE Comment_Content(
+  comment_id INT NOT NULL,
+  content text,
+  FOREIGN KEY (comment_id) REFERENCES Comment(comment_id) ON DELETE CASCADE,
+  PRIMARY KEY(comment_id)
 );
 
-CREATE TABLE blog.post_content(
-  post_id serial PRIMARY KEY NOT NULL,
-  CONSTRAINT post FOREIGN KEY (post_id)
-    REFERENCES blog.post(post_id) MATCH SIMPLE
-    ON UPDATE NO ACTION ON DELETE NO ACTION,
-  content text
+CREATE TABLE Post_Content(
+  post_id INT NOT NULL,
+  content text,
+  FOREIGN KEY (post_id) REFERENCES Post(post_id) ON DELETE CASCADE,
+  PRIMARY KEY (post_id)
 );
 

@@ -1,10 +1,10 @@
 package dao
 
+import akka.http.javadsl.model.headers.Date
 import org.joda.time.DateTime
 
 import scala.concurrent.{ExecutionContext, Future}
 import javax.inject.Inject
-
 import models.Author
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
@@ -22,7 +22,6 @@ class AuthorDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvide
     def username = column[String]("username")
     def password = column[String]("password")
     def email    = column[String]("email")
-
     def * = (username, password, email) <> (Author.tupled, Author.unapply)
   }
 }
